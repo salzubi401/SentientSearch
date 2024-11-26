@@ -6,7 +6,8 @@ load_dotenv()
 from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from groq_api import get_answer, get_relevant_questions
+# from groq_api import get_answer, get_relevant_questions
+from fireworks_api import get_answer as get_answer_fireworks, get_relevant_questions as get_relevant_questions_fireworks
 from sources_searcher import get_sources
 from build_context import build_context
 from sources_manipulation import populate_sources
@@ -54,11 +55,13 @@ def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = Fa
 
             search_contexts = build_context(sources_result, query, pro_mode, date_context)
 
-            for chunk in get_answer(query, search_contexts, date_context):
+            # for chunk in get_answer(query, search_contexts, date_context):
+            for chunk in get_answer_fireworks(query, search_contexts, date_context):
                 yield "data:" + json.dumps({'type': 'llm', 'text': chunk}).decode() + "\n\n"
 
             try:
-                relevant_questions = get_relevant_questions(search_contexts, query)
+                # relevant_questions = get_relevant_questions(search_contexts, query)
+                relevant_questions = get_relevant_questions_fireworks(search_contexts, query)
                 relevant_json = json.loads(relevant_questions)
                 yield "data:" + json.dumps({'type': 'relevant', 'data': relevant_json}).decode() + "\n\n"
             except Exception as e:
