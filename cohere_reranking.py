@@ -7,7 +7,7 @@ import cohere
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 MODEL = "rerank-multilingual-v3.0"
 
-co = cohere.Client(api_key=COHERE_API_KEY)
+co = cohere.Client(api_key=COHERE_API_KEY, timeout=20)
 
 
 def get_reranking_cohere(docs, query, top_res):

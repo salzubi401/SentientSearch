@@ -6,7 +6,7 @@ from semantic_chunkers import StatisticalChunker
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
 encoder = CohereEncoder(cohere_api_key=COHERE_API_KEY, input_type='search_document',
-                        name='embed-multilingual-v3.0')
+                        name='embed-multilingual-v3.0',)
 
 chunker = StatisticalChunker(encoder=encoder, max_split_tokens=200)
 

@@ -1,5 +1,6 @@
 import logging
-from jina_rerank import get_reranking_jina
+from cohere_reranking import get_reranking_cohere
+# from jina_rerank import get_reranking_jina
 from semantic_chunking import get_chunking
 
 # Configure logging
@@ -53,7 +54,7 @@ def build_context(sources_result, query, pro_mode, date_context):
 
         if pro_mode:
             # you can choose to use jina or cohere for reranking
-            final_list = get_reranking_jina(combined_list, query + date_context, 15)
+            final_list = get_reranking_cohere(combined_list, query + date_context, 15)
         else:
             final_list = combined_list
 

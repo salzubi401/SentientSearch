@@ -37,6 +37,7 @@ def get_reranking_jina(docs: List[str], query: str, top_res: int) -> List[str]:
 
         response = requests.post(API_URL, headers=HEADERS, json=data, timeout=10)
         response.raise_for_status()
+        logger.info(f"Jina reranking response: OK")
         response_data = response.json()
 
         return [item['document']['text'] for item in response_data.get('results', [])]

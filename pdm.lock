@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:c81eaba11e2c1b6164e64b87f7e1973b55ad0b1a9fede43c1835e1a197412289"
+content_hash = "sha256:b9248acbfd39190821e969ba5c840cd3de6586108c8a8ea4152451f57824d1bc"
 
 [[metadata.targets]]
 requires_python = "==3.10.*"
@@ -2620,6 +2620,15 @@ files = [
     {file = "tiktoken-0.7.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:8e58c7eb29d2ab35a7a8929cbeea60216a4ccdf42efa8974d8e176d50c9a3df5"},
     {file = "tiktoken-0.7.0-cp310-cp310-win_amd64.whl", hash = "sha256:21a20c3bd1dd3e55b91c1331bf25f4af522c525e771691adbc9a69336fa7f702"},
     {file = "tiktoken-0.7.0.tar.gz", hash = "sha256:1077266e949c24e0291f6c350433c6f0971365ece2b173a23bc3b9f9defef6b6"},
+]
+
+[[package]]
+name = "timeout-decorator"
+version = "0.5.0"
+summary = "Timeout decorator"
+groups = ["default"]
+files = [
+    {file = "timeout-decorator-0.5.0.tar.gz", hash = "sha256:6a2f2f58db1c5b24a2cc79de6345760377ad8bdc13813f5265f6c3e63d16b3d7"},
 ]
 
 [[package]]
