@@ -1,9 +1,13 @@
 from docling.document_converter import DocumentConverter
 
+#TODO: Checkout Apache Tika, seems to be orders of magnitude faster
+
 class WebContentExtractor:
-    def __init__(self):
+    def __init__(self, context_length=10000):
         """Initialize the WebContentExtractor with a DocumentConverter instance."""
         self.converter = DocumentConverter()
+        #TODO: Experiment with different context lengths
+        self.context_length = context_length
 
     def extract_website_content(self, urls):
         """
@@ -25,7 +29,7 @@ class WebContentExtractor:
                 data = [x[0].orig for x in loader.document.iterate_items() if x[0].label.value == 'paragraph']
                 data = [x.replace("\n", "") for x in data]
                 clean_text = "\n\n".join(data)
-                return clean_text[:4000] if len(clean_text) > 200 else ""
+                return clean_text[:self.context_length] if len(clean_text) > 200 else ""
             
             # Handle list of URLs
             loaders = self.converter.convert_all(urls)
@@ -34,7 +38,7 @@ class WebContentExtractor:
                 data = [x[0].orig for x in loader.document.iterate_items() if x[0].label.value == 'paragraph']
                 data = [x.replace("\n", "") for x in data]
                 clean_text = "\n\n".join(data)
-                results.append(clean_text[:4000] if len(clean_text) > 200 else "")
+                results.append(clean_text[:self.context_length] if len(clean_text) > 200 else "")
             
             return results
 

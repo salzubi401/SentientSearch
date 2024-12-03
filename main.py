@@ -82,7 +82,6 @@ def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = Fa
             sources_result = get_sources(query, pro_mode, stored_location)
             yield "data:" + json.dumps({'type': 'sources', 'data': sources_result}).decode() + "\n\n"
 
-            print('point 1')
             #Essentially, if we're in pro mode, then we're extracting content from 2 websites using langchain
             #TODO: Figure out number of websites (I'm guessing 1-3 is good); use docling?
             if sources_result.get('organic') is not None and pro_mode is True:
@@ -92,23 +91,10 @@ def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = Fa
                     sources_result['organic'], 2, timeout=30
                 )
 
-            print('point 2')
             search_contexts = build_context(sources_result, query, pro_mode, date_context)
             # for chunk in get_answer(query, search_contexts, date_context):
             for chunk in get_answer_fireworks(query, search_contexts, date_context):
                 yield "data:" + json.dumps({'type': 'llm', 'text': chunk}).decode() + "\n\n"
-
-            # try:
-            #     # relevant_questions = get_relevant_questions(search_contexts, query)
-            #     relevant_questions = get_relevant_questions_fireworks(search_contexts, query)
-            #     relevant_json = json.loads(relevant_questions)
-            #     yield "data:" + json.dumps({'type': 'relevant', 'data': relevant_json}).decode() + "\n\n"
-            # except Exception as e:
-            #     print(f"error in relevant questions main.py {e}")
-            #     yield "data:" + json.dumps({'type': 'relevant', 'data': []}).decode() + "\n\n"
-            #
-            # yield "data:" + json.dumps({'type': 'finished', 'data': ""}).decode() + "\n\n"
-            # yield "event: end-of-stream\ndata: null\n\n"
 
         except Exception as e:
             print(e)
