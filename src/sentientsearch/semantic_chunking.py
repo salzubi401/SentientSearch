@@ -1,8 +1,7 @@
 import os
 
-# from semantic_router.encoders import CohereEncoder
 from semantic_chunkers import StatisticalChunker    
-from nvidia_embedder import NvidiaEncoder
+from src.sentientsearch.embedders.nvidia_embedder import NvidiaEncoder
 
 #Implemented my own encoder
 encoder = NvidiaEncoder(input_type='query')

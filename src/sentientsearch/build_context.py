@@ -1,9 +1,7 @@
 import logging
 import time
-# from cohere_reranking import get_reranking_cohere
-from SentientSearch.nvidia_reranking import get_reranking_nvidia
-# from jina_rerank import get_reranking_jina
-from semantic_chunking import get_chunking
+from src.sentientsearch.rerankers.nvidia_reranking import get_reranking_nvidia
+from src.sentientsearch.semantic_chunking import get_chunking
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

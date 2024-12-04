@@ -4,7 +4,7 @@ from typing import Any, List, Optional
 import requests
 from pydantic import PrivateAttr
 
-from encoder_base import DenseEncoder
+from src.sentientsearch.embedders.encoder_base import DenseEncoder
 
 class NvidiaEncoder(DenseEncoder):
     _client: Any = PrivateAttr()

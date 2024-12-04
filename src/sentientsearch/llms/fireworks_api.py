@@ -2,7 +2,7 @@ import json
 import os
 from fireworks.client import Fireworks
 from langchain_core.prompts import PromptTemplate
-from prompts import search_prompt_system, relevant_prompt_system
+from src.sentientsearch.prompts import search_prompt_system, relevant_prompt_system
 
 # use ENV variables
 MODEL = "accounts/fireworks/models/llama-v3p1-70b-instruct"

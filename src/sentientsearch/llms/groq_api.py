@@ -2,7 +2,7 @@ import json
 import os
 from groq import Groq
 from langchain_core.prompts import PromptTemplate
-from prompts import search_prompt_system, relevant_prompt_system
+from src.sentientsearch.prompts import search_prompt_system, relevant_prompt_system
 
 # use ENV variables
 MODEL = "llama3-70b-8192"

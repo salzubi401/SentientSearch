@@ -1,4 +1,4 @@
-from extract_content_docling import WebContentExtractor
+from src.sentientsearch.scrapers.extract_content_docling import WebContentExtractor
 
 
 def populate_sources(sources, num_elements):

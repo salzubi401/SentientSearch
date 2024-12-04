@@ -6,11 +6,10 @@ load_dotenv()
 from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-# from groq_api import get_answer, get_relevant_questions
-from fireworks_api import get_answer as get_answer_fireworks, get_relevant_questions as get_relevant_questions_fireworks
-from sources_searcher import get_sources
-from build_context import build_context
-from sources_manipulation import populate_sources
+from src.sentientsearch.llms.fireworks_api import get_answer as get_answer_fireworks, get_relevant_questions as get_relevant_questions_fireworks
+from src.sentientsearch.sources_searcher import get_sources
+from src.sentientsearch.build_context import build_context
+from src.sentientsearch.sources_manipulation import populate_sources
 
 
 app = FastAPI()
