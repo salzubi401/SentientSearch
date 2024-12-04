@@ -10,6 +10,7 @@ class NvidiaEncoder(DenseEncoder):
     _client: Any = PrivateAttr()
     type: str = "nvidia"
     input_type: Optional[str] = "passage"
+    url: Optional[str] = None
 
     def __init__(
         self,
@@ -17,6 +18,7 @@ class NvidiaEncoder(DenseEncoder):
         nvidia_api_key: Optional[str] = None,
         score_threshold: float = 0.3,
         input_type: Optional[str] = "passage",
+        url: Optional[str] = "https://integrate.api.nvidia.com/v1/embeddings",
     ):
         super().__init__(
             name=name,
@@ -25,7 +27,8 @@ class NvidiaEncoder(DenseEncoder):
         )
         self.input_type = input_type
         self._client = self._initialize_client(nvidia_api_key)
-
+        self.url = url
+        
     def _initialize_client(self, nvidia_api_key: Optional[str] = None):
         """Initializes the NVIDIA client.
 
@@ -43,7 +46,6 @@ class NvidiaEncoder(DenseEncoder):
         if self._client is None:
             raise ValueError("NVIDIA client is not initialized.")
         try:
-            url = "https://integrate.api.nvidia.com/v1/embeddings"
             headers = {
                 "accept": "application/json",
                 "content-type": "application/json",
@@ -53,11 +55,8 @@ class NvidiaEncoder(DenseEncoder):
                 "input": docs,
                 "model": self.name,
                 "input_type": self.input_type,
-                "encoding_format": "float",
-                "truncate": "NONE",
-                "user": "string"
             }
-            response = requests.post(url, json=payload, headers=headers)
+            response = requests.post(self.url, json=payload, headers=headers)
             response.raise_for_status()
             data = response.json().get("data", [])
             embeddings = [item.get("embedding", []) for item in data]

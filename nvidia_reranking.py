@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 # Constants
 load_dotenv()  # Load environment variables
 NVIDIA_API_KEY = os.getenv('NVIDIA_API_KEY')
-NVIDIA_API_URL = "https://ai.api.nvidia.com/v1/retrieval/nvidia/reranking"
-MODEL = "nvidia/rerank-qa-mistral-4b"
+NVIDIA_API_URL = "http://localhost:8002/v1/ranking"
+#"https://ai.api.nvidia.com/v1/retrieval/nvidia/reranking"
+MODEL = "nvidia/nv-rerankqa-mistral-4b-v3"
+#"nvidia/rerank-qa-mistral-4b"
 
 def get_reranking_nvidia(docs, query, top_res=None):
     """
@@ -26,13 +28,12 @@ def get_reranking_nvidia(docs, query, top_res=None):
             "model": MODEL,
             "query": {"text": query},
             "passages": [{"text": doc} for doc in docs],
-            "truncate": "NONE"
         }
         
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "Authorization": f"Bearer {NVIDIA_API_KEY}"
+            # "Authorization": f"Bearer {NVIDIA_API_KEY}"
         }
 
         # Make the API call

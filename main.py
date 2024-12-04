@@ -70,7 +70,7 @@ def populate_sources_with_timeout(organic_sources, num_sources, timeout=30):
 
 # you can change to post if typical your query is too long
 @app.get("/search")
-def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = False):
+def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = True):
     if not query:
         raise HTTPException(status_code=400, detail="Query cannot be empty")
 

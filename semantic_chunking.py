@@ -1,13 +1,11 @@
 import os
 
-from semantic_router.encoders import CohereEncoder
-from semantic_chunkers import StatisticalChunker
+# from semantic_router.encoders import CohereEncoder
+from semantic_chunkers import StatisticalChunker    
+from nvidia_embedder import NvidiaEncoder
 
-COHERE_API_KEY = os.getenv("COHERE_API_KEY")
-
-encoder = CohereEncoder(cohere_api_key=COHERE_API_KEY, input_type='search_document',
-                        name='embed-multilingual-v3.0',)
-
+#Implemented my own encoder
+encoder = NvidiaEncoder(input_type='query')
 chunker = StatisticalChunker(encoder=encoder, max_split_tokens=200)
 
 
