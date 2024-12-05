@@ -18,7 +18,7 @@ class NvidiaEncoder(DenseEncoder):
         nvidia_api_key: Optional[str] = None,
         score_threshold: float = 0.3,
         input_type: Optional[str] = "passage",
-        url: Optional[str] = "https://integrate.api.nvidia.com/v1/embeddings",
+        url: Optional[str] = "http://localhost:8000/v1/embeddings",
     ):
         super().__init__(
             name=name,

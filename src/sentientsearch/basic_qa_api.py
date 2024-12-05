@@ -1,4 +1,4 @@
-from main import ask
+from src.sentientsearch.main import ask
 import nest_asyncio
 import asyncio
 import json

@@ -1,5 +1,6 @@
 from src.sentientsearch.scrapers.extract_content_docling import WebContentExtractor
-
+from src.sentientsearch.rerankers.nvidia_reranking import get_reranking_nvidia
+from src.sentientsearch.semantic_chunking import get_chunking
 
 def populate_sources(sources, num_elements):
     try:
@@ -12,7 +13,6 @@ def populate_sources(sources, num_elements):
         doc_converter = WebContentExtractor()
         links = [source['link'] for _, source in valid_sources]
         html_contents = doc_converter.extract_website_content(links)
-        
         # Update sources with their HTML content
         for (i, source), html in zip(valid_sources, html_contents):
             source['html'] = html
