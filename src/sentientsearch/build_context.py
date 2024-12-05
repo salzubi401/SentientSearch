@@ -65,11 +65,7 @@ def build_context(sources_result, query, pro_mode, date_context):
                     combined_list.append(answer_box[key])
 
         if pro_mode:
-            start_time = time.time()
             final_list = get_reranking_nvidia(combined_list, query + date_context, 15)
-
-            reranking_time = time.time() - start_time
-            logger.info(f"Reranking took {reranking_time:.2f} seconds")
         else:
             final_list = combined_list
 
