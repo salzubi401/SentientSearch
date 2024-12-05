@@ -46,16 +46,16 @@ def populate_sources_global_wrapper(args):
     """
     Wrapper function to call the actual populate_sources with unpacked arguments.
     """
-    organic_sources, num_sources = args
-    return populate_sources(organic_sources, num_sources)
+    organic_sources, num_sources, query = args
+    return populate_sources(organic_sources, num_sources, query)
 
-def populate_sources_with_timeout(organic_sources, num_sources, timeout=30):
+def populate_sources_with_timeout(organic_sources, num_sources, query, timeout=30):
     """
     Run populate_sources in a subprocess with a timeout.
     """
     with multiprocessing.Pool(processes=1) as pool:
         # Pass arguments as a tuple since multiprocessing needs a single argument
-        result = pool.apply_async(populate_sources_global_wrapper, ((organic_sources, num_sources),))
+        result = pool.apply_async(populate_sources_global_wrapper, ((organic_sources, num_sources, query),))
         try:
             return result.get(timeout=timeout)
         except multiprocessing.TimeoutError:
@@ -85,10 +85,10 @@ def ask(query: str, date_context: str, stored_location: str, pro_mode: bool = Tr
             #TODO: Figure out number of websites (I'm guessing 1-3 is good); use docling?
             if sources_result.get('organic') is not None and pro_mode is True:
                 # set the number of websites to scrape : here = 2
-                # sources_result['organic'] = populate_sources(sources_result['organic'], 2)
                 sources_result['organic'] = populate_sources_with_timeout(
-                    sources_result['organic'], 2, timeout=30
+                    sources_result['organic'], num_sources=4, query=query, timeout=30
                 )
+
 
             search_contexts = build_context(sources_result, query, pro_mode, date_context)
             # for chunk in get_answer(query, search_contexts, date_context):
