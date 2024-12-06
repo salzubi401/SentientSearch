@@ -5,7 +5,8 @@ from src.sentientsearch.embedders.nvidia_embedder import NvidiaEncoder
 
 #Implemented my own encoder
 encoder = NvidiaEncoder(input_type='query')
-chunker = StatisticalChunker(encoder=encoder, max_split_tokens=200)
+#TODO: This chunker does not work well with weird characters...
+chunker = StatisticalChunker(encoder=encoder, max_split_tokens=150)
 
 
 def get_chunking(text):
