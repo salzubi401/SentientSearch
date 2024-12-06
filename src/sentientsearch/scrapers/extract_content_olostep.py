@@ -18,7 +18,8 @@ async def scrape_url(session: aiohttp.ClientSession, url: str, olo_api_key: str)
         "url": url,
         "timeout": 65,
         "waitBeforeScraping": 0,
-        "removeCSSselectors": 'none',
+        "removeCSSselectors": 'default',
+        "removeImages": "true",
         "nodeCountry": "US",
         "expandHtml": "true"
     }
